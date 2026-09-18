@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mahakarya — Hunian Berkelas, Warisan Keluarga</title>
+  <meta name="description" content="Website properti premium Mahakarya, terinspirasi dari desain Figma yang dikirim." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['DM Sans', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            display: ['Cormorant Garamond', 'Georgia', 'serif']
+          },
+          colors: {
+            ink: '#171717',
+            warm: '#F5F2EC',
+            paper: '#FBF9F5',
+            bronze: '#B77851',
+            stone: '#DED8CF'
+          },
+          boxShadow: {
+            soft: '0 18px 50px rgba(17,17,17,.08)'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { background:#FBF9F5; color:#171717; }
+    .eyebrow { letter-spacing:.22em; text-transform:uppercase; font-size:.62rem; }
+    .grid-line { background-image: linear-gradient(to right, rgba(23,23,23,.08) 1px, transparent 1px); background-size: 25% 100%; }
+    .fade-up { opacity:0; transform:translateY(18px); transition:all .7s ease; }
+    .fade-up.show { opacity:1; transform:none; }
+    .noise::before { content:""; position:absolute; inset:0; pointer-events:none; opacity:.08; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.2'/%3E%3C/svg%3E"); }
+    .menu-open .mobile-menu { display:block; }
+  </style>
+</head>
+
+<body class="font-sans">
+  <header class="fixed inset-x-0 top-0 z-50 border-b border-black/[0.06] bg-[#FBF9F5]/95 backdrop-blur-xl">
+    <div class="mx-auto flex h-[46px] max-w-[1360px] items-center justify-between px-5 sm:px-7 lg:px-8">
+      <!-- Brand -->
+      <a href="#top" class="flex shrink-0 items-center gap-3" aria-label="Sanctum Estates & Architecture">
+        <span class="grid h-[28px] w-[28px] place-items-center rounded-[6px] bg-ink font-display text-[15px] leading-none text-white shadow-[0_5px_18px_rgba(0,0,0,.10)]">
+          M
+        </span>
+        <span class="leading-none">
+          <span class="block font-display text-[11px] font-semibold tracking-[.20em] text-ink sm:text-[12px]">SANCTUM</span>
+          <span class="mt-[3px] block text-[6px] font-medium tracking-[.23em] text-bronze sm:text-[7px]">ESTATES &amp; ARCHITECTURE</span>
+        </span>
+      </a>
+
+      <!-- Desktop navigation -->
+      <nav class="hidden items-center gap-7 md:flex lg:gap-8" aria-label="Primary navigation">
+        <a class="text-[8px] font-medium uppercase tracking-[.14em] text-black/75 transition hover:text-black lg:text-[9px]" href="#top">Home</a>
+        <a class="text-[8px] font-medium uppercase tracking-[.14em] text-black/75 transition hover:text-black lg:text-[9px]" href="#koleksi">Properties</a>
+        <a class="text-[8px] font-medium uppercase tracking-[.14em] text-black/75 transition hover:text-black lg:text-[9px]" href="#konsep">Architecture</a>
+        <a class="text-[8px] font-medium uppercase tracking-[.14em] text-black/75 transition hover:text-black lg:text-[9px]" href="#material">Facilities</a>
+        <a class="text-[8px] font-medium uppercase tracking-[.14em] text-black/75 transition hover:text-black lg:text-[9px]" href="#top">About</a>
+        <a class="text-[8px] font-medium uppercase tracking-[.14em] text-black/75 transition hover:text-black lg:text-[9px]" href="#kontak">Contact</a>
+      </nav>
+
+      <!-- Right actions -->
+      <div class="flex items-center gap-2.5">
+        <a href="#kontak" class="hidden items-center gap-2 rounded-full bg-ink px-3.5 py-[7px] text-[7px] font-medium uppercase tracking-[.13em] text-white shadow-[0_7px_18px_rgba(0,0,0,.10)] transition hover:opacity-90 sm:flex">
+          <span class="h-[5px] w-[5px] rounded-full bg-[#4FD48C]"></span>
+          <span>Konsultasi</span>
+          <span class="ml-0.5 text-[10px] leading-none">→</span>
+        </a>
+
+        <a href="#kontak" aria-label="Akun" class="relative grid h-[28px] w-[28px] place-items-center rounded-full border border-black/10 bg-white/50">
+          <span class="relative block h-[11px] w-[10px]">
+            <span class="absolute left-1/2 top-0 h-[4px] w-[4px] -translate-x-1/2 rounded-full bg-ink"></span>
+            <span class="absolute bottom-0 left-1/2 h-[5px] w-[9px] -translate-x-1/2 rounded-t-full bg-ink"></span>
+          </span>
+        </a>
+
+        <button id="menuBtn" aria-label="Buka menu" class="grid h-[28px] w-[28px] place-items-center rounded-full border border-black/10 md:hidden">
+          <span class="space-y-[3px]">
+            <span class="block h-px w-3.5 bg-black"></span>
+            <span class="block h-px w-3.5 bg-black"></span>
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-menu hidden border-t border-black/5 bg-paper px-5 py-5 md:hidden">
+      <nav class="grid gap-4 text-[10px] font-medium uppercase tracking-[.16em]">
+        <a href="#top">Home</a>
+        <a href="#koleksi">Properties</a>
+        <a href="#konsep">Architecture</a>
+        <a href="#material">Facilities</a>
+        <a href="#top">About</a>
+        <a href="#kontak">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="relative overflow-hidden pt-[76px]">
+      <div class="mx-auto max-w-7xl px-5 pb-6 lg:px-8">
+        <div class="grid gap-8 lg:grid-cols-[1.05fr_.95fr] lg:items-end">
+          <div class="fade-up pt-8 lg:pt-16">
+            <div class="eyebrow text-bronze">MAHAKARYA / PRIVATE RESIDENCE</div>
+            <h1 class="mt-4 max-w-3xl font-display text-5xl leading-[.95] sm:text-6xl lg:text-7xl">
+              Hunian untuk <em class="text-bronze">Kenyamanan Abadi</em><br/>
+              &amp; Warisan Keluarga.
+            </h1>
+            <p class="mt-6 max-w-xl text-sm leading-7 text-black/58">
+              Sebuah pendekatan arsitektur yang merayakan cahaya, proporsi, material jujur, dan ruang yang terasa personal sejak langkah pertama.
+            </p>
+            <div class="mt-8 flex flex-wrap gap-3">
+              <a href="#kontak" class="rounded-full bg-ink px-5 py-3 text-[10px] uppercase tracking-[.18em] text-white">Konsultasi Senior</a>
+              <a href="#koleksi" class="rounded-full border border-black/10 bg-white px-5 py-3 text-[10px] uppercase tracking-[.18em]">Jelajahi Rumah</a>
+            </div>
+          </div>
+
+          <div class="fade-up relative">
+            <div class="absolute -left-3 top-9 z-20 rounded-2xl bg-white/85 px-3 py-3 text-[9px] shadow-soft backdrop-blur">
+              <div class="font-medium">4 Bedrooms</div>
+              <div class="mt-1 text-black/45">Private residence</div>
+            </div>
+            <div class="absolute right-5 top-24 z-20 rounded-xl bg-ink px-3 py-3 text-[9px] text-white shadow-soft">
+              4 Baths
+            </div>
+            <div class="absolute bottom-16 left-6 z-20 max-w-[250px] rounded-2xl bg-white/90 p-4 shadow-soft backdrop-blur">
+              <div class="eyebrow text-bronze">MAIN RESIDENCE</div>
+              <div class="mt-2 font-display text-xl">Arsitektur yang hidup dari cahaya.</div>
+            </div>
+            <img
+              src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1400&q=88"
+              alt="Rumah modern premium dengan kaca dan material batu"
+              class="h-[430px] w-full rounded-[2rem] object-cover object-center shadow-soft lg:h-[590px]"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="border-y border-black/8 bg-white">
+        <div class="mx-auto grid max-w-7xl grid-cols-2 lg:grid-cols-4">
+          <div class="border-r border-black/8 px-5 py-6 lg:px-8">
+            <div class="font-display text-4xl">550 <span class="text-base">m²</span></div>
+            <div class="mt-1 text-[9px] uppercase tracking-[.16em] text-black/45">Land Area</div>
+          </div>
+          <div class="border-r border-black/8 px-5 py-6 lg:px-8">
+            <div class="font-display text-4xl">420 <span class="text-base">m²</span></div>
+            <div class="mt-1 text-[9px] uppercase tracking-[.16em] text-black/45">Building Area</div>
+          </div>
+          <div class="border-r border-black/8 px-5 py-6 lg:px-8">
+            <div class="font-display text-4xl">4</div>
+            <div class="mt-1 text-[9px] uppercase tracking-[.16em] text-black/45">Bedrooms</div>
+          </div>
+          <div class="px-5 py-6 lg:px-8">
+            <div class="font-display text-4xl">4</div>
+            <div class="mt-1 text-[9px] uppercase tracking-[.16em] text-black/45">Bathrooms</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="konsep" class="border-b border-black/8 bg-warm">
+      <div class="mx-auto max-w-7xl px-5 py-20 lg:px-8 lg:py-28">
+        <div class="fade-up text-center">
+          <div class="eyebrow text-bronze">DESIGN DNA / MAHAKARYA</div>
+          <h2 class="mt-3 font-display text-4xl sm:text-5xl">Komposisi Arsitektur Terpadu</h2>
+        </div>
+
+        <div class="mx-auto mt-10 max-w-4xl overflow-hidden rounded-xl bg-ink p-4 text-white shadow-soft">
+          <div class="flex items-center justify-between text-[10px] uppercase tracking-[.15em]">
+            <span>01 — Spatial composition</span>
+            <span class="text-bronze">View concept</span>
+          </div>
+        </div>
+
+        <div class="mt-4 grid gap-4 md:grid-cols-[1fr_1.25fr_1fr]">
+          <article class="fade-up rounded-2xl bg-ink p-7 text-white shadow-soft">
+            <div class="text-bronze">01</div>
+            <h3 class="mt-10 font-display text-3xl">Proporsi yang tenang</h3>
+            <p class="mt-4 text-sm leading-6 text-white/60">Garis arsitektur dibuat bersih agar ruang terasa lapang, namun tetap hangat dan akrab.</p>
+          </article>
+
+          <figure class="fade-up overflow-hidden rounded-2xl bg-stone shadow-soft">
+            <img
+              src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=1000&q=88"
+              alt="Kolam dan taman pada hunian mewah"
+              class="h-full min-h-[280px] w-full object-cover"
+            />
+          </figure>
+
+          <article class="fade-up rounded-2xl bg-ink p-7 text-white shadow-soft">
+            <div class="text-bronze">02</div>
+            <h3 class="mt-10 font-display text-3xl">Ruang yang bernapas</h3>
+            <p class="mt-4 text-sm leading-6 text-white/60">Cahaya alami dan bukaan besar membangun koneksi terus-menerus antara interior dan lanskap.</p>
+          </article>
+        </div>
+
+        <div class="mx-auto mt-4 max-w-4xl rounded-xl bg-ink p-4 text-white shadow-soft">
+          <div class="flex items-center justify-between text-[10px] uppercase tracking-[.15em]">
+            <span>02 — Indoor / outdoor connection</span>
+            <span class="text-bronze">Seamless living</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="border-b border-black/8 bg-paper">
+      <div class="mx-auto grid max-w-7xl grid-cols-2 border-x border-black/8 sm:grid-cols-4">
+        <div class="px-5 py-10 text-center"><div class="font-display text-4xl">80+</div><div class="mt-1 text-[9px] uppercase tracking-[.14em] text-black/45">Detail crafted</div></div>
+        <div class="border-l border-black/8 px-5 py-10 text-center"><div class="font-display text-4xl">95%</div><div class="mt-1 text-[9px] uppercase tracking-[.14em] text-black/45">Custom driven</div></div>
+        <div class="border-l border-t border-black/8 px-5 py-10 text-center sm:border-t-0"><div class="font-display text-4xl">50+</div><div class="mt-1 text-[9px] uppercase tracking-[.14em] text-black/45">Trusted artisans</div></div>
+        <div class="border-l border-t border-black/8 px-5 py-10 text-center sm:border-t-0"><div class="font-display text-4xl">99%</div><div class="mt-1 text-[9px] uppercase tracking-[.14em] text-black/45">Long-life materials</div></div>
+      </div>
+    </section>
+
+    <section id="koleksi" class="bg-paper">
+      <div class="mx-auto max-w-7xl px-5 py-20 lg:px-8 lg:py-28">
+        <div class="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+          <div class="fade-up">
+            <div class="eyebrow text-bronze">PROPERTI TERPILIH / PRIVATE COLLECTION</div>
+            <h2 class="mt-3 font-display text-4xl sm:text-5xl">Koleksi Hunian Ikonik</h2>
+          </div>
+          <p class="max-w-md text-sm leading-6 text-black/52">
+            Enam karakter hunian untuk gaya hidup yang berbeda—dirancang dengan bahasa material dan ketelitian yang sama.
+          </p>
+        </div>
+
+        <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div class="fade-up group overflow-hidden rounded-2xl border border-black/8 bg-white shadow-soft">
+            <div class="relative">
+              <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=88" class="h-60 w-full object-cover transition duration-500 group-hover:scale-105" alt="Rumah The Grand Pavilion">
+              <span class="absolute left-4 top-4 rounded-full bg-ink/90 px-3 py-1 text-[9px] text-white">THE GRAND PAVILION</span>
+            </div>
+            <div class="p-5">
+              <div class="flex items-start justify-between gap-3"><h3 class="font-display text-2xl">The Grand Pavilion</h3><span class="text-xs text-bronze">Rp 12.8M</span></div>
+              <p class="mt-2 text-sm text-black/55">Ruang keluarga besar, taman tengah, dan fasad batu alami.</p>
+              <div class="mt-4 flex justify-between border-t border-black/8 pt-4 text-[10px] uppercase tracking-[.12em] text-black/45"><span>5 bed</span><span>620 m²</span><span>City view</span></div>
+            </div>
+          </div>
+
+          <div class="fade-up group overflow-hidden rounded-2xl border border-black/8 bg-white shadow-soft">
+            <div class="relative">
+              <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=88" class="h-60 w-full object-cover transition duration-500 group-hover:scale-105" alt="Pasoeo Hills">
+              <span class="absolute left-4 top-4 rounded-full bg-ink/90 px-3 py-1 text-[9px] text-white">PASOEO HILLS</span>
+            </div>
+            <div class="p-5">
+              <div class="flex items-start justify-between gap-3"><h3 class="font-display text-2xl">Pasoeo Hills</h3><span class="text-xs text-bronze">Rp 8.9M</span></div>
+              <p class="mt-2 text-sm text-black/55">Hunian kontemporer dengan lanskap tropis dan sunset terrace.</p>
+              <div class="mt-4 flex justify-between border-t border-black/8 pt-4 text-[10px] uppercase tracking-[.12em] text-black/45"><span>4 bed</span><span>510 m²</span><span>Pool</span></div>
+            </div>
+          </div>
+
+          <div class="fade-up group overflow-hidden rounded-2xl border border-black/8 bg-white shadow-soft">
+            <div class="relative">
+              <img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=900&q=88" class="h-60 w-full object-cover transition duration-500 group-hover:scale-105" alt="Luminary Sky Suite">
+              <span class="absolute left-4 top-4 rounded-full bg-ink/90 px-3 py-1 text-[9px] text-white">LUMINARY SKY SUITE</span>
+            </div>
+            <div class="p-5">
+              <div class="flex items-start justify-between gap-3"><h3 class="font-display text-2xl">Luminary Sky Suite</h3><span class="text-xs text-bronze">Rp 15.2M</span></div>
+              <p class="mt-2 text-sm text-black/55">Vertikal, elegan, dan dibuat untuk panorama kota dari setiap lantai.</p>
+              <div class="mt-4 flex justify-between border-t border-black/8 pt-4 text-[10px] uppercase tracking-[.12em] text-black/45"><span>4 bed</span><span>460 m²</span><span>Skyline</span></div>
+            </div>
+          </div>
+
+          <div class="fade-up group overflow-hidden rounded-2xl border border-black/8 bg-white shadow-soft">
+            <div class="relative">
+              <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=88" class="h-60 w-full object-cover transition duration-500 group-hover:scale-105" alt="Ubud Residence">
+              <span class="absolute left-4 top-4 rounded-full bg-ink/90 px-3 py-1 text-[9px] text-white">UBUD COLLECTION</span>
+            </div>
+            <div class="p-5">
+              <div class="flex items-start justify-between gap-3"><h3 class="font-display text-2xl">Ubud Residence</h3><span class="text-xs text-bronze">Rp 7.4M</span></div>
+              <p class="mt-2 text-sm text-black/55">Kayu, batu, dan bukaan lebar berpadu dalam suasana resort privat.</p>
+              <div class="mt-4 flex justify-between border-t border-black/8 pt-4 text-[10px] uppercase tracking-[.12em] text-black/45"><span>3 bed</span><span>390 m²</span><span>Garden</span></div>
+            </div>
+          </div>
+
+          <div class="fade-up group overflow-hidden rounded-2xl border border-black/8 bg-white shadow-soft">
+            <div class="relative">
+              <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=900&q=88" class="h-60 w-full object-cover transition duration-500 group-hover:scale-105" alt="Arterra Modern Villa">
+              <span class="absolute left-4 top-4 rounded-full bg-ink/90 px-3 py-1 text-[9px] text-white">ARTERRA MODERN VILLA</span>
+            </div>
+            <div class="p-5">
+              <div class="flex items-start justify-between gap-3"><h3 class="font-display text-2xl">Arterra Modern Villa</h3><span class="text-xs text-bronze">Rp 10.6M</span></div>
+              <p class="mt-2 text-sm text-black/55">Volume arsitektur tegas, taman privat, dan kolam yang menyatu dengan teras.</p>
+              <div class="mt-4 flex justify-between border-t border-black/8 pt-4 text-[10px] uppercase tracking-[.12em] text-black/45"><span>4 bed</span><span>480 m²</span><span>Courtyard</span></div>
+            </div>
+          </div>
+
+          <div class="fade-up group overflow-hidden rounded-2xl border border-black/8 bg-white shadow-soft">
+            <div class="relative">
+              <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=900&q=88" class="h-60 w-full object-cover transition duration-500 group-hover:scale-105" alt="The Grove Montara">
+              <span class="absolute left-4 top-4 rounded-full bg-ink/90 px-3 py-1 text-[9px] text-white">THE GROVE MONTARA</span>
+            </div>
+            <div class="p-5">
+              <div class="flex items-start justify-between gap-3"><h3 class="font-display text-2xl">The Grove Montara</h3><span class="text-xs text-bronze">Rp 13.5M</span></div>
+              <p class="mt-2 text-sm text-black/55">Kediaman teduh dengan pepohonan matang dan privacy yang maksimal.</p>
+              <div class="mt-4 flex justify-between border-t border-black/8 pt-4 text-[10px] uppercase tracking-[.12em] text-black/45"><span>5 bed</span><span>570 m²</span><span>Forest</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="material" class="border-y border-black/8 bg-warm">
+      <div class="mx-auto grid max-w-7xl gap-12 px-5 py-20 lg:grid-cols-[.95fr_1.05fr] lg:px-8 lg:py-28">
+        <div class="fade-up">
+          <div class="eyebrow text-bronze">MATERIAL PHILOSOPHY / TIDAK BERLALU</div>
+          <h2 class="mt-3 font-display text-4xl leading-tight sm:text-5xl">Batu Karang Purba &amp; Kayu Lintang Lestari: Dibangun untuk Bertahan Generasi</h2>
+          <p class="mt-6 text-sm leading-7 text-black/55">Palet material dirancang untuk menua dengan indah. Tekstur hadir bukan sekadar dekorasi, tetapi sebagai bagian dari pengalaman ruang sehari-hari.</p>
+          <div class="mt-8 grid gap-3 sm:grid-cols-2">
+            <div class="rounded-xl bg-white p-5"><div class="text-bronze">01</div><h3 class="mt-5 font-display text-2xl">Batu karang purba</h3><p class="mt-2 text-xs leading-5 text-black/50">Karakter natural, pori halus, dan tone hangat.</p></div>
+            <div class="rounded-xl bg-white p-5"><div class="text-bronze">02</div><h3 class="mt-5 font-display text-2xl">Kayu lintang lestari</h3><p class="mt-2 text-xs leading-5 text-black/50">Serat kaya dan terasa lebih indah seiring waktu.</p></div>
+            <div class="rounded-xl bg-white p-5"><div class="text-bronze">03</div><h3 class="mt-5 font-display text-2xl">Marmer terpilih</h3><p class="mt-2 text-xs leading-5 text-black/50">Dipilih berdasarkan karakter, bukan tren sesaat.</p></div>
+            <div class="rounded-xl bg-white p-5"><div class="text-bronze">04</div><h3 class="mt-5 font-display text-2xl">Logam berpatina</h3><p class="mt-2 text-xs leading-5 text-black/50">Aksen yang memberi depth dan kontras yang matang.</p></div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <img class="fade-up h-[340px] w-full rounded-2xl object-cover sm:h-[440px]" src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=900&q=88" alt="Rumah kayu di lingkungan alami">
+          <div class="grid gap-3">
+            <img class="fade-up h-[165px] w-full rounded-2xl object-cover sm:h-[214px]" src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=88" alt="Detail material batu dan kayu">
+            <img class="fade-up h-[165px] w-full rounded-2xl object-cover sm:h-[214px]" src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=900&q=88" alt="Interior modern dengan material alami">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="relative overflow-hidden bg-[#24364A] text-white noise">
+      <div class="absolute inset-0">
+        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=88" alt="" class="h-full w-full object-cover opacity-25" />
+        <div class="absolute inset-0 bg-[#172434]/65"></div>
+      </div>
+
+      <div class="relative mx-auto max-w-7xl px-5 py-20 lg:px-8 lg:py-28">
+        <div class="mx-auto max-w-2xl text-center fade-up">
+          <div class="eyebrow text-[#D49A73]">DESIGNED FOR GENERATIONS</div>
+          <h2 class="mt-3 font-display text-4xl leading-tight sm:text-5xl">Dirancang Khusus untuk Ketenangan &amp; Kemudahan Generasi Matang</h2>
+        </div>
+
+        <div class="mt-12 grid gap-4 md:grid-cols-3">
+          <article class="fade-up rounded-2xl bg-white p-7 text-black shadow-soft">
+            <div class="grid h-9 w-9 place-items-center rounded-full bg-warm text-bronze">↗</div>
+            <h3 class="mt-6 font-display text-3xl">Aksesibilitas</h3>
+            <p class="mt-3 text-sm leading-6 text-black/55">Sirkulasi yang nyaman, pencahayaan terukur, dan ruang transisi yang mudah digunakan.</p>
+            <a href="#kontak" class="mt-6 inline-block text-[10px] uppercase tracking-[.14em] text-bronze">Pelajari pendekatan →</a>
+          </article>
+          <article class="fade-up rounded-2xl bg-white p-7 text-black shadow-soft">
+            <div class="grid h-9 w-9 place-items-center rounded-full bg-warm text-bronze">✦</div>
+            <h3 class="mt-6 font-display text-3xl">Kenyamanan</h3>
+            <p class="mt-3 text-sm leading-6 text-black/55">Ventilasi silang, akustik yang tertata, dan layout yang mendukung ritme hidup yang tenang.</p>
+            <a href="#kontak" class="mt-6 inline-block text-[10px] uppercase tracking-[.14em] text-bronze">Lihat detail →</a>
+          </article>
+          <article class="fade-up rounded-2xl bg-white p-7 text-black shadow-soft">
+            <div class="grid h-9 w-9 place-items-center rounded-full bg-warm text-bronze">◎</div>
+            <h3 class="mt-6 font-display text-3xl">Keamanan</h3>
+            <p class="mt-3 text-sm leading-6 text-black/55">Perimeter privat, smart access, dan sistem yang dibuat untuk proteksi tanpa terasa kaku.</p>
+            <a href="#kontak" class="mt-6 inline-block text-[10px] uppercase tracking-[.14em] text-bronze">Lihat sistem →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="kontak" class="bg-paper">
+      <div class="mx-auto max-w-7xl px-5 py-20 lg:px-8 lg:py-28">
+        <div class="rounded-[2rem] border border-black/8 bg-warm p-6 sm:p-8 lg:p-10">
+          <div class="grid gap-10 lg:grid-cols-[.78fr_1.22fr] lg:items-center">
+            <div class="fade-up">
+              <div class="eyebrow text-bronze">PRIVATE CONSULTATION</div>
+              <h2 class="mt-3 font-display text-4xl leading-tight sm:text-5xl">Mulai Percakapan Pribadi Bersama Konsultan Senior Kami</h2>
+              <p class="mt-5 max-w-lg text-sm leading-7 text-black/55">Ceritakan preferensi hunian, lokasi yang Anda incar, dan bagaimana rumah ini akan dipakai dalam 5–10 tahun ke depan.</p>
+
+              <div class="mt-7 rounded-xl bg-white p-5">
+                <div class="text-[10px] uppercase tracking-[.15em] text-black/40">Hubungi langsung</div>
+                <div class="mt-2 font-medium">+62 (021) 8088-9810</div>
+                <div class="mt-1 text-sm text-black/50">hello@mahakarya-residence.id</div>
+                <div class="mt-1 text-sm text-black/50">Senin–Jumat · 09.00–17.00</div>
+              </div>
+            </div>
+
+            <form id="consultForm" class="fade-up rounded-2xl bg-white p-6 shadow-soft sm:p-7">
+              <div class="grid gap-5 sm:grid-cols-2">
+                <label class="text-xs">Nama
+                  <input required name="name" class="mt-2 w-full rounded-xl border border-black/10 bg-paper px-4 py-3 outline-none focus:border-bronze" placeholder="Nama lengkap" />
+                </label>
+                <label class="text-xs">Email
+                  <input required type="email" name="email" class="mt-2 w-full rounded-xl border border-black/10 bg-paper px-4 py-3 outline-none focus:border-bronze" placeholder="nama@email.com" />
+                </label>
+                <label class="text-xs">WhatsApp
+                  <input name="phone" class="mt-2 w-full rounded-xl border border-black/10 bg-paper px-4 py-3 outline-none focus:border-bronze" placeholder="+62..." />
+                </label>
+                <label class="text-xs">Kebutuhan
+                  <select name="need" class="mt-2 w-full rounded-xl border border-black/10 bg-paper px-4 py-3 outline-none focus:border-bronze">
+                    <option>Primary residence</option>
+                    <option>Second home</option>
+                    <option>Investment</option>
+                    <option>Custom design</option>
+                  </select>
+                </label>
+              </div>
+              <label class="mt-5 block text-xs">Lokasi pilihan
+                <input name="location" class="mt-2 w-full rounded-xl border border-black/10 bg-paper px-4 py-3 outline-none focus:border-bronze" placeholder="Kota / kawasan" />
+              </label>
+              <label class="mt-5 block text-xs">Catatan
+                <textarea name="message" rows="4" class="mt-2 w-full resize-none rounded-xl border border-black/10 bg-paper px-4 py-3 outline-none focus:border-bronze" placeholder="Ceritakan kebutuhan Anda..."></textarea>
+              </label>
+              <label class="mt-5 flex items-start gap-3 text-xs text-black/55">
+                <input required type="checkbox" class="mt-1 accent-black" />
+                <span>Saya setuju dihubungi oleh tim Mahakarya untuk kebutuhan konsultasi.</span>
+              </label>
+              <button class="mt-6 w-full rounded-xl bg-ink px-5 py-4 text-[10px] font-medium uppercase tracking-[.18em] text-white transition hover:opacity-90">Kirim Permintaan Private Tour</button>
+              <p id="formNote" class="mt-3 hidden text-center text-xs text-bronze">Terima kasih. Permintaan demo Anda sudah tercatat.</p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-ink text-white">
+    <div class="mx-auto grid max-w-7xl gap-10 px-5 py-14 md:grid-cols-[1.2fr_.8fr_.8fr_.8fr] lg:px-8">
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="grid h-8 w-8 place-items-center rounded-full border border-white/20 text-[10px]">M</span>
+          <div class="font-display text-xl">Mahakarya</div>
+        </div>
+        <p class="mt-5 max-w-sm text-xs leading-6 text-white/55">Private residences yang dirancang untuk menjadi tempat tinggal—dan warisan.</p>
+      </div>
+      <div>
+        <div class="eyebrow text-white/35">Lokasi Kami</div>
+        <div class="mt-4 grid gap-2 text-xs text-white/65"><span>Jakarta</span><span>Bali</span><span>Bandung</span><span>Semarang</span></div>
+      </div>
+      <div>
+        <div class="eyebrow text-white/35">Hubungi</div>
+        <div class="mt-4 grid gap-2 text-xs text-white/65"><span>+62 (021) 8088-9810</span><span>hello@mahakarya-residence.id</span><span>Private appointment only</span></div>
+      </div>
+      <div>
+        <div class="eyebrow text-white/35">Layanan</div>
+        <div class="mt-4 grid gap-2 text-xs text-white/65"><span>Property advisory</span><span>Custom residence</span><span>Private tour</span><span>Aftercare</span></div>
+      </div>
+    </div>
+    <div class="border-t border-white/10">
+      <div class="mx-auto flex max-w-7xl flex-col gap-3 px-5 py-5 text-[10px] text-white/35 sm:flex-row sm:items-center sm:justify-between lg:px-8">
+        <span>© 2026 Mahakarya Residence. Demo implementation.</span>
+        <span>Privacy · Terms · Instagram</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const root = document.documentElement;
+    const menuBtn = document.getElementById('menuBtn');
+    menuBtn?.addEventListener('click', () => document.body.classList.toggle('menu-open'));
+
+    document.querySelectorAll('.mobile-menu a').forEach(a => a.addEventListener('click', () => {
+      document.body.classList.remove('menu-open');
+    }));
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    document.getElementById('consultForm')?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const note = document.getElementById('formNote');
+      note.classList.remove('hidden');
+      e.currentTarget.reset();
+    });
+  </script>
+</body>
+</html>
